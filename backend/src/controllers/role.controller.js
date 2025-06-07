@@ -35,12 +35,27 @@ class RoleController {
         }
     }
 
+    async detailBySlug(req, res) {
+        try {
+            const slug = req.params.slug;
+            const role = await RoleService.detail(slug);
+            res.status(200).json({
+                message: 'Lấy thông tin vai trò thành công',
+                data: role
+            });
+        } catch (error) {
+            console.error('Lỗi:', error);
+            res.status(404).json({
+                message: error.message || 'Không tìm thấy vai trò',
+            });
+        }
+    }
+
     async update(req, res) {
         try {
-            const id = req.params.id;
+            const slug = req.params.slug;
             const data = req.body;
-            const update = await RoleService.update(id, data);
-            console.log(update);
+            const update = await RoleService.update(slug, data);
 
             res.status(201).json({
                 message: 'Cập nhật thành công vai trò',
@@ -57,17 +72,26 @@ class RoleController {
 
     async delete(req, res) {
         try {
-            const role = await RoleService.delete(req.params.id);
-            res.status(201).json({
-                message: 'Xóa thành công vai trò',
-            })
+            const slug = req.params.slug;
+            const deletedCount = await RoleService.delete(slug);
+
+            if (deletedCount === 0) {
+                return res.status(404).json({
+                    message: 'Không tìm thấy vai trò để xóa'
+                });
+            }
+
+            res.status(200).json({
+                message: 'Xóa thành công vai trò'
+            });
         } catch (error) {
             res.status(500).json({
-                message: "Đã xảy ra lỗi xóa vai trò",
+                message: "Đã xảy ra lỗi khi xóa vai trò",
                 error: error.message
-            })
+            });
         }
     }
+
 }
 
 module.exports = new RoleController();

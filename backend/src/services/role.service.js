@@ -7,19 +7,25 @@ class RoleService {
         return roles;
     }
 
-    static async create(data) {
-        const role = Role.create(data);
+    static async detail(slug) {
+        const role = await Role.findOne({ where: { slug } });
+        if (!role) throw new Error('Role không tồn tại');
         return role;
     }
 
-    static async update(id, data) {
-        const role = await Role.findOne({ where: { id: id } });
+    static async create(data) {
+        const role = await Role.create(data);
+        return role;
+    }
+
+    static async update(slug, data) {
+        const role = await Role.findOne({ where: { id: slug } });
         if (!role) throw new Error('Role không tồn tại');
         return await role.update(data)
     }
 
-    static async delete(id) {
-        return await Role.destroy({ where: { id: id } })
+    static async delete(slug) {
+        return await Role.destroy({ where: { id: slug } })
     }
 
 }
