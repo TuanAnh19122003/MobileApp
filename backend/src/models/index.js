@@ -1,12 +1,14 @@
 const sequelize = require('../config/database');
 const User = require('./user.model');
+const Role = require('./role.model');
 
 const db = {
     User,
+    Role,
     sequelize
 }
 
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
     .then(() => {
         console.log('Connection successful');
     })
