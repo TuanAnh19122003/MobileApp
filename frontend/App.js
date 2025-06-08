@@ -1,25 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import StackNavigator from './src/navigation/StackNavigator'
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>App</Text>
-    </View>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   )
 }
 
 export default App
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  text: {
-    fontFamily: 'times new roman',
-    fontSize: 32,
-    fontWeight: 'bold'
-  }
-})
