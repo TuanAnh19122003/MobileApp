@@ -42,7 +42,7 @@ class UserController {
             });
         } catch (error) {
             console.error('Lỗi:', error);
-            res.status(404).json({
+            res.status(401).json({
                 message: error.message || 'Không tìm thấy ngươi dùng',
             });
         }
@@ -60,7 +60,7 @@ class UserController {
             })
         } catch (error) {
             console.log('Lỗi: ', error);
-            res.status(500).json({
+            res.status(401).json({
                 message: "Đã xảy ra lỗi khi cập nhật người dùng",
                 error: error.message
             })
@@ -82,7 +82,7 @@ class UserController {
                 message: 'Xóa thành công người dùng'
             });
         } catch (error) {
-            res.status(500).json({
+            res.status(401).json({
                 message: "Đã xảy ra lỗi khi xóa vai trò",
                 error: error.message
             });

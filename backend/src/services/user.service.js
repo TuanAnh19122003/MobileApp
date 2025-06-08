@@ -1,4 +1,4 @@
-const hashPassword = require('../config/hashPassword');
+const hashPassword = require('../utils/hashPassword');
 const Role = require('../models/role.model');
 const User = require('../models/user.model');
 

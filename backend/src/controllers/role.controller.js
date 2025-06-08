@@ -12,7 +12,7 @@ class RoleController {
             })
         } catch (error) {
             console.log('Lỗi: ', error);
-            res.status(500).json({
+            res.status(401).json({
                 message: "Đã xảy ra lỗi khi lấy danh sách vai trò",
                 error: error.message
             })
@@ -28,7 +28,7 @@ class RoleController {
             })
         } catch (error) {
             console.log('Lỗi: ', error);
-            res.status(500).json({
+            res.status(401).json({
                 message: "Đã xảy ra lỗi khi thêm vai trò",
                 error: error.message
             })
@@ -45,7 +45,7 @@ class RoleController {
             });
         } catch (error) {
             console.error('Lỗi:', error);
-            res.status(404).json({
+            res.status(401).json({
                 message: error.message || 'Không tìm thấy vai trò',
             });
         }
