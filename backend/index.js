@@ -9,14 +9,9 @@ const db = require('./src/models/index');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const apiRouter = require('./src/routes/index.routes');
 
-const roleRouter = require('./src/routes/role.routes');
-const userRouter = require('./src/routes/user.routes');
-const authRouter = require('./src/routes/auth.routes');
-
-app.use('/api', roleRouter);
-app.use('/api', userRouter);
-app.use('/api', authRouter)
+app.use('/api', apiRouter);
 
 
 app.get('/', (req, res) => {
