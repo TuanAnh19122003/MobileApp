@@ -11,8 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const roleRouter = require('./src/routes/role.routes');
+const userRouter = require('./src/routes/user.routes');
 
 app.use('/api', roleRouter);
+app.use('/api', userRouter);
 
 
 app.get('/', (req, res) => {

@@ -24,13 +24,22 @@ const User = sequelize.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    roleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'roles',
+            key: 'id'
+        }
     }
 }, {
     timestamps: true,
     tableName: 'users'
 })
 
-User.belongsTo(Role, { foreignKey: 'roleId' });
-Role.hasMany(User, { foreignKey: 'roleId' })
+User.belongsTo(Role, { foreignKey: 'roleId', as: 'roles' });
+Role.hasMany(User, { foreignKey: 'roleId', as: 'users' });
+
 
 module.exports = User;
