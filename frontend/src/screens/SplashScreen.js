@@ -76,13 +76,12 @@ export default function SplashScreen({ navigation }) {
             useNativeDriver: false,
             easing: Easing.linear,
         }).start(() => {
-            // Fade out before navigate
             Animated.timing(fadeOut, {
                 toValue: 0,
                 duration: 800,
                 useNativeDriver: true,
             }).start(() => {
-                navigation.replace('Home');
+                navigation.replace('Login');
             });
         });
 
@@ -132,7 +131,6 @@ export default function SplashScreen({ navigation }) {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradient}
             >
-                {/* Particles */}
                 <Particle delay={0} startX={SCREEN_WIDTH / 2 - 15} startY={200} />
                 <Particle delay={700} startX={SCREEN_WIDTH / 2 + 20} startY={210} />
                 <Particle delay={1400} startX={SCREEN_WIDTH / 2 - 30} startY={215} />
@@ -145,7 +143,6 @@ export default function SplashScreen({ navigation }) {
                     ]}
                 >
                     <Icon name="cafe-outline" size={100} color="#fff" />
-                    {/* Animated glowing border */}
                     <Animated.View
                         style={[
                             styles.glowBorder,
