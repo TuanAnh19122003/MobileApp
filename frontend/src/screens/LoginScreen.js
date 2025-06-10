@@ -2,12 +2,35 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'reac
 import React, { useState } from 'react'
 import Icon from '@react-native-vector-icons/ionicons'
 import CheckBox from '@react-native-community/checkbox'
+import axios from 'axios'
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [remember, setRemember] = useState(false);
+
+    const handleLogin = async () => {
+        if (!email || !password) {
+            Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ Email và Mật khẩu');
+            return;
+        }
+        try {
+            const response = await axios.post('http://10.0.2.2:5000/api/auth/login', {
+                email,
+                password
+            });
+            const { user, message } = response.data;
+            Alert.alert('Thông báo', message);
+            navigation.navigate('MainApp')
+        } catch (error) {
+            if (error.response) {
+                Alert.alert('Lỗi', message || 'Đăng nhập thất bại');
+            } else {
+                Alert.alert('Lỗi', 'Không thể kết nối đến máy chủ');
+            }
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -69,7 +92,7 @@ const LoginScreen = () => {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.buttonLogin} onPress={() => { }}>
+                <TouchableOpacity style={styles.buttonLogin} onPress={handleLogin}>
                     <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>
 
